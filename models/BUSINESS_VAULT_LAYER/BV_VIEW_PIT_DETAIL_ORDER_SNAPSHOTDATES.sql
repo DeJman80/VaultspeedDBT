@@ -1,0 +1,12 @@
+{{
+	config(
+		materialized='view',
+		alias='VIEW_PIT_DETAIL_ORDER_SNAPSHOTDATES',
+		schema='BV',
+		tags=['view', 'BV', 'BV_VIEW_PIT_DETAIL_ORDER_SNAPSHOTDATES_SSD_VIEW']
+	)
+}}
+	SELECT DISTINCT 
+		  "SAT_SRC1"."ORDER_HKEY" AS "ORDER_HKEY"
+		, "SAT_SRC1"."LOAD_DATE" AS "SNAPSHOT_TIMESTAMP"
+	FROM {{ ref('RDV_S_SF1_ORDER') }} "SAT_SRC1"

@@ -1,0 +1,75 @@
+version: 2
+sources:
+- name: DV_MTD
+  quoting:
+    database: true
+    schema: true
+    identifier: true
+  tables:
+  - name: LOAD_CYCLE_INFO
+  - name: FMC_BV_LOADING_WINDOW_TABLE
+  - name: DV_LOAD_CYCLE_INFO
+  - name: FMC_LOADING_HISTORY
+  - name: FMC_LOADING_HISTORY_TEMP
+- name: RDV
+  quoting:
+    database: true
+    schema: true
+    identifier: true
+  tables:
+  - name: H_CUSTOMER
+  - name: H_ORDER
+  - name: H_PART
+  - name: H_SUPPLIER
+  - name: H_CUSTOMER_TMP
+  - name: H_ORDER_TMP
+  - name: H_PART_TMP
+  - name: H_SUPPLIER_TMP
+  - name: S_SF1_ORDERCUST_LDS
+  - name: S_SF1_SF1_LINEITEM_LDS
+  - name: S_SF1_SF1_PARTSUPP_LDS
+  - name: L_ORDERCUST_LND
+  - name: L_SF1_LINEITEM_LND
+  - name: L_SF1_PARTSUPP_LND
+  - name: S_SF1_CUSTOMER
+  - name: S_SF1_ORDER
+  - name: S_SF1_PART
+  - name: S_SF1_SUPPLIER
+- name: BV
+  quoting:
+    database: true
+    schema: true
+    identifier: true
+  tables:
+  - name: PIT_DETAIL_CUSTOMER
+  - name: PIT_DETAIL_ORDER
+  - name: PIT_DETAIL_ORDERCUST
+  - name: PIT_DETAIL_PART
+  - name: PIT_DETAIL_SF1_LINEITEM
+  - name: PIT_DETAIL_SF1_PARTSUPP
+  - name: PIT_DETAIL_SUPPLIER
+  - name: PIT_DETAIL_TRANS_CUSTOMER
+  - name: PIT_DETAIL_TRANS_ORDER
+  - name: PIT_DETAIL_TRANS_ORDERCUST
+  - name: PIT_DETAIL_TRANS_PART
+  - name: PIT_DETAIL_TRANS_SF1_LINEITEM
+  - name: PIT_DETAIL_TRANS_SF1_PARTSUPP
+  - name: PIT_DETAIL_TRANS_SUPPLIER
+  - name: DIM_CUSTOMER
+  - name: DIM_ORDER
+  - name: DIM_PART
+  - name: DIM_SUPPLIER
+  - name: VIEW_PIT_DETAIL_CUSTOMER_SNAPSHOTDATES
+  - name: VIEW_PIT_DETAIL_ORDERCUST_SNAPSHOTDATES
+  - name: VIEW_PIT_DETAIL_ORDER_SNAPSHOTDATES
+  - name: VIEW_PIT_DETAIL_PART_SNAPSHOTDATES
+  - name: VIEW_PIT_DETAIL_SF1_LINEITEM_SNAPSHOTDATES
+  - name: VIEW_PIT_DETAIL_SF1_PARTSUPP_SNAPSHOTDATES
+  - name: VIEW_PIT_DETAIL_SUPPLIER_SNAPSHOTDATES
+  - name: VIEW_PIT_DETAIL_TRANS_CUSTOMER_SNAPSHOTDATES
+  - name: VIEW_PIT_DETAIL_TRANS_ORDERCUST_SNAPSHOTDATES
+  - name: VIEW_PIT_DETAIL_TRANS_ORDER_SNAPSHOTDATES
+  - name: VIEW_PIT_DETAIL_TRANS_PART_SNAPSHOTDATES
+  - name: VIEW_PIT_DETAIL_TRANS_SF1_LINEITEM_SNAPSHOTDATES
+  - name: VIEW_PIT_DETAIL_TRANS_SF1_PARTSUPP_SNAPSHOTDATES
+  - name: VIEW_PIT_DETAIL_TRANS_SUPPLIER_SNAPSHOTDATES

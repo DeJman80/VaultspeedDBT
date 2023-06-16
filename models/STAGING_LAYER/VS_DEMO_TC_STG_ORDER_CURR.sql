@@ -1,0 +1,72 @@
+{{
+	config(
+		materialized='incremental',
+		pre_hook= [
+			'{% if var("load_type") == "INCR" and var("source") == "VS_DEMO_TC" %} TRUNCATE TABLE {{ this }}; {% endif %}',
+			'{% if var("load_type") == "INIT" and var("source") == "VS_DEMO_TC" %} TRUNCATE TABLE {{ this }}; {% endif %}'
+		],
+		alias='ORDER_CURR',
+		schema='VS_DEMO_TC_STG',
+		tags=['VS_DEMO_TC', 'STG_SF1_ORDER_INCR', 'STG_SF1_ORDER_INIT']
+	)
+}}
+select * from (
+	WITH "FAKE_PREV_REF" AS 
+	( 
+		SELECT 
+			  "STG_PREV_SRC"."ORDER_HKEY" AS "ORDER_HKEY"
+		FROM {{ ref('VS_DEMO_TC_STG_ORDER_PREV') }} "STG_PREV_SRC"
+		WHERE  0 = 1
+	)
+	SELECT 
+		  UPPER(MD5_HEX( 'SF1' || '^' || "EXT_SRC"."O_ORDERKEY_BK" || '^' )) AS "ORDER_HKEY"
+		, "EXT_SRC"."LOAD_DATE" AS "LOAD_DATE"
+		, "EXT_SRC"."LOAD_CYCLE_ID" AS "LOAD_CYCLE_ID"
+		, 'SF1' AS "SRC_BK"
+		, 'SF1.ORDER' AS "RECORD_SOURCE"
+		, "EXT_SRC"."JRN_FLAG" AS "JRN_FLAG"
+		, "EXT_SRC"."RECORD_TYPE" AS "RECORD_TYPE"
+		, "EXT_SRC"."O_ORDERKEY" AS "O_ORDERKEY"
+		, "EXT_SRC"."O_ORDERKEY_BK" AS "ORDER_BK"
+		, "EXT_SRC"."C_NAME" AS "C_NAME"
+		, "EXT_SRC"."O_ORDERSTATUS" AS "O_ORDERSTATUS"
+		, "EXT_SRC"."O_TOTALPRICE" AS "O_TOTALPRICE"
+		, "EXT_SRC"."O_ORDERDATE" AS "O_ORDERDATE"
+		, "EXT_SRC"."O_ORDERPRIORITY" AS "O_ORDERPRIORITY"
+		, "EXT_SRC"."O_CLERK" AS "O_CLERK"
+		, "EXT_SRC"."O_SHIPPRIORITY" AS "O_SHIPPRIORITY"
+		, "EXT_SRC"."O_COMMENT" AS "O_COMMENT"
+		, "EXT_SRC"."DSS_RECORD_SOURCE" AS "DSS_RECORD_SOURCE"
+	FROM {{ ref('VS_DEMO_TC_EXT_ORDER') }} "EXT_SRC"
+	INNER JOIN {{ source('VS_DEMO_TC_MTD', 'MTD_EXCEPTION_RECORDS') }} "MEX_SRC" ON  "MEX_SRC"."RECORD_TYPE" = 'U'
+
+) final 
+where '{{ var("load_type") }}' = 'INCR' and '{{ var("source") }}' = 'VS_DEMO_TC'
+
+UNION ALL
+
+select * from (
+	SELECT 
+		  UPPER(MD5_HEX( 'SF1' || '^' || "EXT_SRC"."O_ORDERKEY_BK" || '^' )) AS "ORDER_HKEY"
+		, "EXT_SRC"."LOAD_DATE" AS "LOAD_DATE"
+		, "EXT_SRC"."LOAD_CYCLE_ID" AS "LOAD_CYCLE_ID"
+		, 'SF1' AS "SRC_BK"
+		, 'SF1.ORDER' AS "RECORD_SOURCE"
+		, "EXT_SRC"."JRN_FLAG" AS "JRN_FLAG"
+		, "EXT_SRC"."RECORD_TYPE" AS "RECORD_TYPE"
+		, "EXT_SRC"."O_ORDERKEY" AS "O_ORDERKEY"
+		, "EXT_SRC"."O_ORDERKEY_BK" AS "ORDER_BK"
+		, "EXT_SRC"."C_NAME" AS "C_NAME"
+		, "EXT_SRC"."O_ORDERSTATUS" AS "O_ORDERSTATUS"
+		, "EXT_SRC"."O_TOTALPRICE" AS "O_TOTALPRICE"
+		, "EXT_SRC"."O_ORDERDATE" AS "O_ORDERDATE"
+		, "EXT_SRC"."O_ORDERPRIORITY" AS "O_ORDERPRIORITY"
+		, "EXT_SRC"."O_CLERK" AS "O_CLERK"
+		, "EXT_SRC"."O_SHIPPRIORITY" AS "O_SHIPPRIORITY"
+		, "EXT_SRC"."O_COMMENT" AS "O_COMMENT"
+		, "EXT_SRC"."DSS_RECORD_SOURCE" AS "DSS_RECORD_SOURCE"
+	FROM {{ ref('VS_DEMO_TC_EXT_ORDER') }} "EXT_SRC"
+	INNER JOIN {{ source('VS_DEMO_TC_MTD', 'MTD_EXCEPTION_RECORDS') }} "MEX_SRC" ON  "MEX_SRC"."RECORD_TYPE" = 'U'
+
+) final 
+where '{{ var("load_type") }}' = 'INIT' and '{{ var("source") }}' = 'VS_DEMO_TC'

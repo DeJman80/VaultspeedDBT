@@ -1,0 +1,121 @@
+version: 2
+sources:
+- name: PG2_SOURCE_DATA_TC"."TPCH_SF1
+  quoting:
+    database: true
+    schema: true
+    identifier: true
+  tables:
+  - name: SF1_CUSTOMER
+  - name: SF1_LINEITEM
+  - name: SF1_ORDERS
+  - name: SF1_PART
+  - name: SF1_PARTSUPP
+  - name: SF1_SUPPLIER
+- name: VS_DEMO_TC_DFV
+  quoting:
+    database: true
+    schema: true
+    identifier: true
+  tables:
+  - name: DROP
+  - name: ORDER
+  - name: ORDER_CUST
+  - name: SF1_CUSTOMER
+  - name: SF1_LINEITEM
+  - name: SF1_ORDERS
+  - name: SF1_PART
+  - name: SF1_PARTSUPP
+  - name: SF1_SUPPLIER
+  - name: VW_ORDER
+  - name: VW_ORDER_CUST
+  - name: VW_SF1_CUSTOMER
+  - name: VW_SF1_LINEITEM
+  - name: VW_SF1_ORDERS
+  - name: VW_SF1_PART
+  - name: VW_SF1_PARTSUPP
+  - name: VW_SF1_SUPPLIER
+- name: VS_DEMO_TC_EXT
+  quoting:
+    database: true
+    schema: true
+    identifier: true
+  tables:
+  - name: ORDER
+  - name: ORDER_CUST
+  - name: SF1_CUSTOMER
+  - name: SF1_LINEITEM
+  - name: SF1_ORDERS
+  - name: SF1_PART
+  - name: SF1_PARTSUPP
+  - name: SF1_SUPPLIER
+- name: VS_DEMO_TC_INI
+  quoting:
+    database: true
+    schema: true
+    identifier: true
+  tables:
+  - name: SF1_CUSTOMER
+  - name: SF1_LINEITEM
+  - name: SF1_ORDERS
+  - name: SF1_PART
+  - name: SF1_PARTSUPP
+  - name: SF1_SUPPLIER
+- name: VS_DEMO_TC_MTD
+  quoting:
+    database: true
+    schema: true
+    identifier: true
+  tables:
+  - name: LOAD_CYCLE_INFO
+  - name: FMC_LOADING_WINDOW_TABLE
+  - name: MTD_EXCEPTION_RECORDS
+- name: VS_DEMO_TC_STG
+  quoting:
+    database: true
+    schema: true
+    identifier: true
+  tables:
+  - name: S_SF1_ORDERCUST_LDS_TMP
+  - name: S_SF1_SF1_LINEITEM_LDS_TMP
+  - name: S_SF1_SF1_PARTSUPP_LDS_TMP
+  - name: S_SF1_CUSTOMER_TMP
+  - name: S_SF1_ORDER_TMP
+  - name: S_SF1_PART_TMP
+  - name: S_SF1_SUPPLIER_TMP
+  - name: ORDER
+  - name: SF1_CUSTOMER
+  - name: SF1_ORDERS
+  - name: SF1_PART
+  - name: SF1_SUPPLIER
+  - name: ORDER_CURR
+  - name: SF1_CUSTOMER_CURR
+  - name: SF1_ORDERS_CURR
+  - name: SF1_PART_CURR
+  - name: SF1_SUPPLIER_CURR
+  - name: ORDER_CUST
+  - name: SF1_LINEITEM
+  - name: SF1_PARTSUPP
+  - name: ORDER_CUST_CURR
+  - name: SF1_LINEITEM_CURR
+  - name: SF1_PARTSUPP_CURR
+  - name: ORDER_CUST_PREV
+  - name: SF1_LINEITEM_PREV
+  - name: SF1_PARTSUPP_PREV
+  - name: ORDER_PREV
+  - name: SF1_CUSTOMER_PREV
+  - name: SF1_ORDERS_PREV
+  - name: SF1_PART_PREV
+  - name: SF1_SUPPLIER_PREV
+- name: VS_DEMO_TC_DTVR
+  quoting:
+    database: true
+    schema: true
+    identifier: true
+  tables:
+  - name: SF1_CUSTOMER
+  - name: SF1_LINEITEM
+  - name: SF1_ORDERS
+  - name: SF1_PART
+  - name: SF1_PARTSUPP
+  - name: SF1_SUPPLIER
